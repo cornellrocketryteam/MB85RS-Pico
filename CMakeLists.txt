@@ -5,6 +5,7 @@ target_sources(MB85RS-Pico INTERFACE
 )
 
 target_link_libraries(MB85RS-Pico INTERFACE
-    hardware_spi
     pico_stdlib
+    hardware_spi
+    hardware_gpio
 )

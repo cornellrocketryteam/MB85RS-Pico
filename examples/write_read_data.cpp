@@ -9,7 +9,7 @@
 
 #define FRAM_CS 17
 
-MB85RS fram(SPI_PORT);
+MB85RS fram(SPI_PORT, FRAM_CS);
 
 int main() {
     stdio_init_all();
@@ -24,7 +24,12 @@ int main() {
     }
     printf("Connected\n");
 
-    
+    if (fram.begin()) {
+        printf("Begin successful\n");
+    } else {
+        printf("Begin failed\n");
+        return 1;
+    }
 
     return 0;
 }
