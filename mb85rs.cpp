@@ -1,3 +1,10 @@
+/**
+ * @file mb85rs.cpp
+ * @author csg83
+ *
+ * @brief MB85RS driver functionality
+ */
+
 #include "mb85rs.hpp"
 #include <cstdio>
 

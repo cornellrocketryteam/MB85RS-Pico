@@ -1,3 +1,10 @@
+/**
+ * @file write_read_data.cpp
+ * @author csg83
+ * 
+ * @brief Unit test of reading and writing data to the FRAM chip
+ */
+
 #include "../mb85rs.hpp"
 #include "tusb.h"
 #include <cstdio>
@@ -39,13 +46,13 @@ int main() {
     uint8_t resp;
 
     uint64_t start = time_us_64();
-    if (!fram.write_bytes(500000, &data, 1)) {
+    if (!fram.write_bytes(424242, &data, 1)) {
         printf("Write failed\n");
     }
     uint64_t write_duration = time_us_64() - start;
 
     start = time_us_64();
-    if (!fram.read_bytes(500000, &resp, 1)) {
+    if (!fram.read_bytes(424242, &resp, 1)) {
         printf("Read failed\n");
     }
     uint64_t read_duration = time_us_64() - start;
