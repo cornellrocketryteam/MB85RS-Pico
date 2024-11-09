@@ -1,8 +1,8 @@
 #ifndef MB85RS_HPP
 #define MB85RS_HPP
 
-#include "hardware/spi.h"
 #include "hardware/gpio.h"
+#include "hardware/spi.h"
 #include "pico/stdlib.h"
 
 #define MB85RS_WRITE (0x02)
@@ -23,12 +23,13 @@ public:
 
     bool begin();
 
-    bool read_bytes();
+    bool read_bytes(uint32_t addr, uint8_t *data, uint8_t len);
 
-    bool write_bytes();
+    bool write_bytes(uint32_t addr, uint8_t *data, uint8_t len);
+
 private:
     bool get_id();
-    uint8_t chip_id[4] = { MANUFACTURER_ID, CONT_CODE, PRODUCT_ID_1, PRODUCT_ID_2 };
+    uint8_t chip_id[4] = {MANUFACTURER_ID, CONT_CODE, PRODUCT_ID_1, PRODUCT_ID_2};
 
     spi_inst_t *spi;
     uint cs;

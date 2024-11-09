@@ -19,6 +19,10 @@ int main() {
     gpio_set_function(SPI_MOSI, GPIO_FUNC_SPI);
     gpio_set_function(SPI_SCK, GPIO_FUNC_SPI);
 
+    gpio_init(FRAM_CS);
+    gpio_set_dir(FRAM_CS, GPIO_OUT);
+    gpio_put(FRAM_CS, 1);
+
     while (!tud_cdc_connected()) {
         sleep_ms(500);
     }
@@ -30,6 +34,26 @@ int main() {
         printf("Begin failed\n");
         return 1;
     }
+
+    uint8_t data = 42;
+    uint8_t resp;
+
+    uint64_t start = time_us_64();
+    if (!fram.write_bytes(500000, &data, 1)) {
+        printf("Write failed\n");
+    }
+    uint64_t write_duration = time_us_64() - start;
+
+    start = time_us_64();
+    if (!fram.read_bytes(500000, &resp, 1)) {
+        printf("Read failed\n");
+    }
+    uint64_t read_duration = time_us_64() - start;
+
+    printf("Data read: %d\n\n", resp);
+
+    printf("Write time: %llu\n", write_duration);
+    printf("Read time: %llu\n", read_duration);
 
     return 0;
 }
