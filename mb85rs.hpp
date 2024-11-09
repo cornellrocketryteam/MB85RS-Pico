@@ -72,7 +72,7 @@ private:
      */
     spi_inst_t *spi;
 
-        /**
+    /**
      * The chip select pin
      */
     uint cs;
